@@ -1,5 +1,7 @@
 <?php
 
+namespace Ziehzeit\Burnengine\Model\API\Post;
+
 use Ziehzeit\Burnengine\Model\Database\Connection;
 use Ziehzeit\Burnengine\Model\Post;
 
@@ -10,10 +12,16 @@ class Read
      */
     public function __construct()
     {
+        echo "test";
+
         header('Access-Control-Allow-Origin: *');
         header('Content-Type: application/json');
 
         $postObject = new Post(new Connection());
+
+        dumpvar($postObject);
+        dumpvar('test');
+        die();
 
         $result = $postObject->read();
 
