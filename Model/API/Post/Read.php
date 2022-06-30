@@ -2,6 +2,8 @@
 
 namespace Ziehzeit\Burnengine\Model\API\Post;
 
+use Exception;
+use PDO;
 use Ziehzeit\Burnengine\Model\Database\Connection;
 use Ziehzeit\Burnengine\Model\Post;
 
@@ -12,16 +14,10 @@ class Read
      */
     public function __construct()
     {
-        echo "test";
-
         header('Access-Control-Allow-Origin: *');
         header('Content-Type: application/json');
 
         $postObject = new Post(new Connection());
-
-        dumpvar($postObject);
-        dumpvar('test');
-        die();
 
         $result = $postObject->read();
 
@@ -32,19 +28,16 @@ class Read
 
             $data['data'] = [];
 
-            foreach ($result->fetch(PDO::FETCH_ASSOC) as $row){
-                extract($row);
-
+            foreach ($result->fetchAll(PDO::FETCH_ASSOC) as $row){
                 $data_item = [
-                    'userID' => $id,
-                    'userType' => $userType,
-                    'dateTime' => $dateTime,
-                    'username' => $username,
+                    'userID' => $row['userID'],
+                    'userType' => $row['userType'],
+                    'timeDate' => $row['timeDate'],
+                    'userName' => $row['userName'],
                 ];
 
                 $data['data'] = $data_item;
             }
-
             echo json_encode($data);
         }else{
             throw new Exception('No Data found in Database!');
