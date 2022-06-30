@@ -20,14 +20,12 @@ class Connection
     public function connect(): PDO
     {
         $database = $this->getDatabase();
+        $connection = false;
 
         try {
-            $connection = new PDO(
-                'mysql:host='.$database->getHost()
-                .';dbname=' .$database->getDatabasename()
-                .$database->getUsername()
-                .$database->getPassword()
-            );
+            $connection = new PDO('mysql:host='.$database->getHost()
+                .';dbname=' .$database->getDatabasename(),
+                $database->getUsername(), $database->getPassword());
 
             $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         }catch(PDOException $pdo){
