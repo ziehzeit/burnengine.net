@@ -1,13 +1,13 @@
 <?php
 
-namespace Ziehzeit\Burnengine\Model\API\Post;
+namespace Ziehzeit\Burnengine\Model\API\Get;
 
 use Exception;
 use PDO;
 use Ziehzeit\Burnengine\Model\Database\Connection;
 use Ziehzeit\Burnengine\Model\Post;
 
-class Read
+class Getter
 {
     /**
      * @throws Exception
