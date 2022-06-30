@@ -1,6 +1,6 @@
 <?php
 
-namespace Ziehzeit\Burnengine\Model\Core;
+namespace Ziehzeit\Burnengine\Model;
 
 class Core
 {
