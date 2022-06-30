@@ -15,7 +15,7 @@ class Database
     public function __construct()
     {
         try {
-            if (false === $_ENV['zz_WAS_NOTICED']){
+            if ('false' === $_ENV['zz_WAS_NOTICED']){
                 throw new Exception('The .env file was not noticed. Please, check it out. :)');
             }
         }catch (Exception $exc){
