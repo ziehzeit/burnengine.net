@@ -1,7 +1,7 @@
 {
   "name": "ziehzeit/burnengine",
   "description": "API",
-  "version": "0.5.6",
+  "version": "0.6.6",
   "minimum-stability": "stable",
   "license": "proprietary",
   "authors": [

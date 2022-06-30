@@ -12,21 +12,20 @@ class Database
     private string $host;
     private string $port;
 
+    /**
+     * @throws Exception
+     */
     public function __construct()
     {
-        try {
-            if ('false' === $_ENV['zz_WAS_NOTICED']){
-                throw new Exception('The .env file was not noticed. Please, check it out. :)');
-            }
-        }catch (Exception $exc){
-            echo $exc->getMessage()."<br>";
+        if ('false' === $_ENV['zz_WAS_NOTICED']){
+            throw new Exception('The .env file was not noticed. Please, check it out. :)');
+        }else{
+            $this->setDatabasename($_ENV['ZZ_DATABASENAME']);
+            $this->setUsername($_ENV['ZZ_USERNAME']);
+            $this->setPassword($_ENV['ZZ_PASSWORD']);
+            $this->setHost($_ENV['ZZ_HOST']);
+            $this->setPort($_ENV['ZZ_PORT']);
         }
-
-        $this->setDatabasename($_ENV['ZZ_DATABASENAME']);
-        $this->setUsername($_ENV['ZZ_USERNAME']);
-        $this->setPassword($_ENV['ZZ_PASSWORD']);
-        $this->setHost($_ENV['ZZ_HOST']);
-        $this->setPort($_ENV['ZZ_PORT']);
     }
 
     /**

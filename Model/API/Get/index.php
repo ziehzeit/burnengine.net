@@ -14,4 +14,8 @@ require_once __DIR__.'/../../../core.php';
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__.'/../../../');
 $dotenv->load();
 
-new Getter();
+try {
+    new Getter();
+}catch (PDOException | Exception $e){
+    echo $e->getMessage();
+}
