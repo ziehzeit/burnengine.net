@@ -4,7 +4,7 @@ namespace Ziehzeit\Burnengine\Model;
 
 use Ziehzeit\Burnengine\Model\Database\Connection;
 
-class Post extends \Ziehzeit\Burnengine\Model\Core\Core
+class Post extends \Ziehzeit\Burnengine\Model\Core
 {
     # dbs tuff
     private Connection $connection;
