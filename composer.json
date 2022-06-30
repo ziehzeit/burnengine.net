@@ -1,6 +1,7 @@
 {
   "name": "ziehzeit/burnengine.net",
   "description": "API",
+  "version": "0.0.0",
   "minimum-stability": "stable",
   "license": "proprietary",
   "authors": [
