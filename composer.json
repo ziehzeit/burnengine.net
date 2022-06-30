@@ -1,0 +1,21 @@
+{
+  "name": "ziehzeit/burnengine.net",
+  "description": "API",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Max Buhe",
+      "email": "hallo@maxbuhe.eu"
+    }
+  ],
+  "require": {
+    "php": "^8.1",
+    "vlucas/phpdotenv": "5.4.x-dev"
+  },
+  "autoload": {
+    "psr-4": {
+      "Ziehzeit\\Burnengine\\": "./"
+    }
+  }
+}
