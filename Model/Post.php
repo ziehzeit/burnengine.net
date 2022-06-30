@@ -2,13 +2,14 @@
 
 namespace Ziehzeit\Burnengine\Model;
 
+use PDOStatement;
 use Ziehzeit\Burnengine\Model\Database\Connection;
 
 class Post extends \Ziehzeit\Burnengine\Model\Core
 {
     # dbs tuff
     private Connection $connection;
-    private string $table = 'users';
+    private string $table = 'Users';
 
     #post stuff
     protected string $userId;
@@ -22,9 +23,9 @@ class Post extends \Ziehzeit\Burnengine\Model\Core
     }
 
     /**
-     * @return bool
+     * @return bool|PDOStatement
      */
-    public function read(): bool
+    public function read(): bool|PDOStatement
     {
         $query = 'Select * from '.$this->table.';';
 
