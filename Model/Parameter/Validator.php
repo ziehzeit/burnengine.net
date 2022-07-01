@@ -16,7 +16,6 @@ class Validator
     public function __construct(array $urlParameters)
     {
         $this->setUrlParameters($urlParameters);
-        $this->urlParameterCheck();
     }
 
     /**
@@ -27,7 +26,7 @@ class Validator
         $parameterList = new ParameterRegistry();
         foreach ($parameterList->getParameterList() as $param){
             if (false === in_array($param, array_keys($this->getUrlParameters()))){
-                return false;
+                throw new Exception('MISSING KEY <u>'.$param.'</u>!');
             };
         }
         return true;

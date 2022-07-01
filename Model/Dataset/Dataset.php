@@ -2,6 +2,8 @@
 
 namespace Ziehzeit\Burnengine\Model\Dataset;
 
+use Exception;
+
 class Dataset
 {
     protected array $raw_content;
@@ -19,10 +21,17 @@ class Dataset
 
     /**
      * @param string $user_type
+     * @throws Exception
      */
     public function setUserType(string $user_type): void
     {
-        $this->user_type = $user_type;
+        preg_match_all('@^\d$@', $user_type, $matches);
+
+        if ($matches[0]){
+            $this->user_type = $user_type;
+        }else{
+            throw new Exception('Given value failed at '.__METHOD__.' !');
+        }
     }
 
     /**
@@ -35,10 +44,16 @@ class Dataset
 
     /**
      * @param string $user_ip_address
+     * @throws Exception
      */
     public function setUserIpAddress(string $user_ip_address): void
     {
-        $this->user_ip_address = $user_ip_address;
+        preg_match_all('@^(\d{1,3}\.){3}\d{1,3}$@', $user_ip_address, $matches);
+        if ($matches){
+            $this->user_ip_address = $user_ip_address;
+        }else{
+            throw new Exception('Given value failed at '.__METHOD__.' !');
+        }
     }
 
     /**
@@ -51,10 +66,17 @@ class Dataset
 
     /**
      * @param string $user_mac_address
+     * @throws Exception
      */
     public function setUserMacAddress(string $user_mac_address): void
     {
-        $this->user_mac_address = $user_mac_address;
+        preg_match_all('@^([\dA-Fa-f]{2}[:-]){5}([\dA-Fa-f]{2})$@', $user_mac_address, $matches);
+
+        if ($matches){
+            $this->user_mac_address = $user_mac_address;
+        }else{
+            throw new Exception('Given value failed at '.__METHOD__.' !');
+        }
     }
 
     /**
