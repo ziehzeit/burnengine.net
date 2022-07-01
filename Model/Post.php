@@ -4,18 +4,13 @@ namespace Ziehzeit\Burnengine\Model;
 
 use PDOStatement;
 use Ziehzeit\Burnengine\Model\Database\Connection;
+use Ziehzeit\Burnengine\Model\Dataset\Dataset;
 
-class Post extends \Ziehzeit\Burnengine\Model\Core
+class Post extends Core
 {
     # dbs tuff
     private Connection $connection;
-    private string $table = 'Users';
-
-    #post stuff
-    protected string $userId;
-    protected string $userType;
-    protected string $userName;
-    protected string $timeDate;
+    private string $table = 'users';
 
     public function __construct(Connection $connection)
     {
@@ -33,6 +28,21 @@ class Post extends \Ziehzeit\Burnengine\Model\Core
 
         $instance->execute();
 
+        return $instance;
+    }
+
+    /**
+     * @param Dataset $dataset
+     * @return false|PDOStatement
+     */
+    public function write(Dataset $dataset): bool|PDOStatement
+    {
+        $query =
+            'insert into '.$this->table
+            .' (`beusertype`, `beipaddress`, `bemacaddress`) 
+            VALUES('.quote($dataset->getUserType()).','.quote($dataset->getUserIpAddress()).','.quote($dataset->getUserMacAddress()).');';
+        $instance = $this->getConnection()->connect()->prepare($query);
+        $instance->execute();
         return $instance;
     }
 
