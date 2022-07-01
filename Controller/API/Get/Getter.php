@@ -1,6 +1,6 @@
 <?php
 
-namespace Ziehzeit\Burnengine\Model\API\Get;
+namespace Ziehzeit\Burnengine\Controller\API\Get;
 
 use Exception;
 use PDO;
@@ -35,8 +35,7 @@ class Getter
                     'timeDate' => $row['timeDate'],
                     'userName' => $row['userName'],
                 ];
-
-                $data['data'] = $data_item;
+                $data['data'][] = $data_item;
             }
             echo json_encode($data);
         }else{
