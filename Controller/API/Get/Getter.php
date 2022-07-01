@@ -30,10 +30,11 @@ class Getter
 
             foreach ($result->fetchAll(PDO::FETCH_ASSOC) as $row){
                 $data_item = [
-                    'userID' => $row['userID'],
-                    'userType' => $row['userType'],
-                    'timeDate' => $row['timeDate'],
-                    'userName' => $row['userName'],
+                    'USER_ID'           => $row['beuserid'],
+                    'USER_TYPE'         => $row['beusertype'],
+                    'USER_IP_ADDRESS'   => $row['beipaddress'],
+                    'USER_MAC_ADDRESS'  => $row['bemacaddress'],
+                    'TIMESTAMP'         => $row['bemacaddress'],
                 ];
                 $data['data'][] = $data_item;
             }
