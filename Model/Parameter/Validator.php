@@ -9,6 +9,7 @@ use Ziehzeit\Burnengine\Model\Dataset\Dataset;
 class Validator
 {
     protected array $urlParameters;
+    protected ParameterRegistry $parameterRegistry;
 
     /**
      * @throws Exception
@@ -23,8 +24,7 @@ class Validator
      */
     public function urlParameterCheck():bool
     {
-        $parameterList = new ParameterRegistry();
-        foreach ($parameterList->getParameterList() as $param){
+        foreach ($this->getParameterRegistry()->getParameterList() as $param){
             if (false === in_array($param, array_keys($this->getUrlParameters()))){
                 throw new Exception('MISSING KEY <u>'.$param.'</u>!');
             };
@@ -46,5 +46,21 @@ class Validator
     public function setUrlParameters(array $urlParameters): void
     {
         $this->urlParameters = $urlParameters;
+    }
+
+    /**
+     * @return ParameterRegistry
+     */
+    public function getParameterRegistry(): ParameterRegistry
+    {
+        return $this->parameterRegistry;
+    }
+
+    /**
+     * @param ParameterRegistry $parameterRegistry
+     */
+    public function setParameterRegistry(ParameterRegistry $parameterRegistry): void
+    {
+        $this->parameterRegistry = $parameterRegistry;
     }
 }
