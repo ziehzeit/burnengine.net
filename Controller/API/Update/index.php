@@ -1,11 +1,11 @@
 <?php
 
-use Ziehzeit\Burnengine\Controller\API\Set\Setter;
+use Ziehzeit\Burnengine\Controller\API\Update\Updater;
 
 require_once '../standardEnvironment.php';
 
 try {
-    new Setter();
+    new Updater();
 }catch (Exception $e){
     echo $e->getMessage();
 }

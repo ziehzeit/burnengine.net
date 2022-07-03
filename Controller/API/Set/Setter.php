@@ -3,29 +3,22 @@
 namespace Ziehzeit\Burnengine\Controller\API\Set;
 
 use Exception;
+use Ziehzeit\Burnengine\Controller\API\APIBase;
 use Ziehzeit\Burnengine\Model\Database\Connection;
 use Ziehzeit\Burnengine\Model\Dataset\Dataset;
 use Ziehzeit\Burnengine\Model\Parameter\Validator;
 use Ziehzeit\Burnengine\Model\Post;
 
-class Setter
+class Setter extends APIBase
 {
     /**
      * @throws Exception
      */
     public function __construct()
     {
-        $validator = new Validator($_GET);
+        parent::__construct();
 
-        if (false === empty($_GET) and $validator->urlParameterCheck()){
-            $dataset = new Dataset();
-            $dataset->setRawContent($_GET);
-            $dataset->setUserIpAddress($_GET['ip']);
-            $dataset->setUserMacAddress($_GET['mac']);
-            $dataset->setUserType($_GET['ut']);
-
-            $post = new Post(new Connection());
-            $post->write($dataset);
-        }
+        $post = new Post(new Connection());
+        $post->write($this->getDataset());
     }
 }

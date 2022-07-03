@@ -4,16 +4,19 @@ namespace Ziehzeit\Burnengine\Controller\API\Get;
 
 use Exception;
 use PDO;
+use Ziehzeit\Burnengine\Controller\API\APIBase;
 use Ziehzeit\Burnengine\Model\Database\Connection;
 use Ziehzeit\Burnengine\Model\Post;
 
-class Getter
+class Getter extends APIBase
 {
     /**
      * @throws Exception
      */
     public function __construct()
     {
+        parent::__construct();
+
         header('Access-Control-Allow-Origin: *');
         header('Content-Type: application/json');
 
