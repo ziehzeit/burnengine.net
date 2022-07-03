@@ -5,6 +5,7 @@ namespace Ziehzeit\Burnengine\Model;
 use PDOStatement;
 use Ziehzeit\Burnengine\Model\Database\Connection;
 use Ziehzeit\Burnengine\Model\Dataset\Dataset;
+use Ziehzeit\Burnengine\Model\Parameter\ParameterRegistry;
 
 class Post extends Core
 {
@@ -44,6 +45,58 @@ class Post extends Core
         $instance = $this->getConnection()->connect()->prepare($query);
         $instance->execute();
         return $instance;
+    }
+
+    /**
+     * @param Dataset $dataset
+     * @return void
+     */
+    public function update(Dataset $dataset):void
+    {
+        $paramReg = new ParameterRegistry();
+        $paramReg->setParameterList($_GET);
+        $paramReg->setParameterList($paramReg->removeParameter('token'));
+
+        $arrayLength = count($dataset->getRawContent());
+        $arrayKeys = array_keys($paramReg->getParameterList());
+
+        $query = 'update '.$this->table.' set (';
+
+        for($i = 0; $i < $arrayLength-1; $i++){
+            $arrayKey = $arrayKeys[$i];
+
+            if (false === $dataset->isToken($arrayKey)){
+                if ($this->assertSame($i, $arrayLength-2)){
+                    $query = $query.''.$arrayKeys[$i].')';
+                }else{
+                    $query = $query.''.$arrayKeys[$i].',';
+                }
+            }
+        }
+
+        $query .= ' VALUES(';
+
+        for($i = 0; $i < $arrayLength-1; $i++){
+            $arrayValue = $dataset->getRawContent()[$arrayKeys[$i]];
+            $arrayKey = $arrayKeys[$i];
+
+            if ($this->assertSame($i, ($arrayLength-2))){
+                if ($this->assertSame($arrayKey, 'ut')){
+                    $query = $query."".$arrayValue.")";
+                }else{
+                    $query = $query."'".$arrayValue."')";
+                }
+            }else{
+                if ($this->assertSame($arrayKey, 'ut')){
+                    $query = $query.$arrayValue.",";
+                }else{
+                    $query = $query."'".$arrayValue."',";
+                }
+            }
+        }
+
+        echo $query;
+        die();
     }
 
     /**
