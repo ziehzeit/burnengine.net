@@ -4,7 +4,13 @@ namespace Ziehzeit\Burnengine\Model;
 
 class Core
 {
-    public function getDatabase(){
-
+    /**
+     * @param $a
+     * @param $b
+     * @return bool
+     */
+    public function assertSame($a, $b):bool
+    {
+     return ($a === $b);
     }
 }
