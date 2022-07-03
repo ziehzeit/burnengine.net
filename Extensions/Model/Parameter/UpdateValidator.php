@@ -8,6 +8,8 @@ use Ziehzeit\Burnengine\Model\Parameter\Validator;
 
 class UpdateValidator extends Validator
 {
+    protected string $token = 'Sxob6ll8hxsxoQseNy*g';
+
     public function __construct(array $urlParameters)
     {
         $parameterRegistry = new ParameterRegistry();
@@ -24,12 +26,28 @@ class UpdateValidator extends Validator
      */
     public function correctPass(): bool|int
     {
-        $token = $this->getUrlParameters()['token'];
+        $unCheckedToken = $this->getUrlParameters()['token'];
 
-        if ($token){
-            return preg_match('|^[a-zA-Z\d/#*+!§,()=:.@äöüÄÖÜß_\-]{20}$|', $this->getUrlParameters()['token']);
+        if (preg_match_all('|^[a-zA-Z\d/#*+!§,()=:.@äöüÄÖÜß_\-]{20}$|', $unCheckedToken) and $this->assertSame($unCheckedToken, $this->getToken())){
+            return true;
         }else{
-            throw new BurnExceptions('No token given! ');
+            throw new BurnExceptions('Token incorrect! ');
         }
+    }
+
+    /**
+     * @return string
+     */
+    private function getToken(): string
+    {
+        return $this->token;
+    }
+
+    /**
+     * @param string $token
+     */
+    private function setToken(string $token): void
+    {
+        $this->token = $token;
     }
 }
