@@ -3,8 +3,9 @@
 namespace Ziehzeit\Burnengine\Model\Dataset;
 
 use Exception;
+use Ziehzeit\Burnengine\Model\Core;
 
-class Dataset
+class Dataset extends Core
 {
     protected array $raw_content;
     protected string $user_type;
@@ -85,6 +86,11 @@ class Dataset
     public function getRawContent(): array
     {
         return $this->raw_content;
+    }
+
+    public function isToken(string $param):bool
+    {
+            return $this->assertSame(strtolower($param), 'token');
     }
 
     /**
