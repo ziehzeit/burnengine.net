@@ -19,7 +19,6 @@ class Updater extends APIBase
 
         $this->getValidator()->correctPass() ? $this->run() : throw new \Exception('Token is incorrect!');
 
-        #ToDo: add table for tokens in db
-        # hash/ hide them with pw given in .env
+        $this->getPostObject()->update($this->getDataset());
     }
 }

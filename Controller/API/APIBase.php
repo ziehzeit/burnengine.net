@@ -4,15 +4,18 @@ namespace Ziehzeit\Burnengine\Controller\API;
 
 use Exception;
 use Ziehzeit\Burnengine\Extensions\Model\Parameter\UpdateValidator;
+use Ziehzeit\Burnengine\Model\Database\Connection;
 use Ziehzeit\Burnengine\Model\Dataset\Dataset;
 use Ziehzeit\Burnengine\Model\Parameter\ParameterRegistry;
 use Ziehzeit\Burnengine\Model\Parameter\Validator;
+use Ziehzeit\Burnengine\Model\Post;
 
 class APIBase
 {
     protected Dataset $dataset;
     protected ParameterRegistry $parameterRegistry;
     protected Validator $validator;
+    protected Post $postObject;
 
     /**
      * @throws Exception
@@ -20,6 +23,7 @@ class APIBase
     public function __construct()
     {
         $this->setParameterRegistry(new ParameterRegistry());
+        $this->setPostObject(new Post(new Connection()));
     }
 
     /**
@@ -96,5 +100,21 @@ class APIBase
     public function setValidator(Validator $validator): void
     {
         $this->validator = $validator;
+    }
+
+    /**
+     * @return Post
+     */
+    public function getPostObject(): Post
+    {
+        return $this->postObject;
+    }
+
+    /**
+     * @param Post $postObject
+     */
+    public function setPostObject(Post $postObject): void
+    {
+        $this->postObject = $postObject;
     }
 }
