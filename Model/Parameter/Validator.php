@@ -3,10 +3,10 @@
 namespace Ziehzeit\Burnengine\Model\Parameter;
 
 use Exception;
-use Ziehzeit\Burnengine\Model\Dataset\Dataset;
+use Ziehzeit\Burnengine\Model\Core;
 
 #hier fehlt nen standardValidator
-class Validator
+class Validator extends Core
 {
     protected array $urlParameters;
     protected ParameterRegistry $parameterRegistry;
